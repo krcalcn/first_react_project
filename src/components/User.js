@@ -23,6 +23,10 @@ class User extends Component {
 
         }
     }*/
+    onDeleteUser = (e) => {
+        const{id, deleteUser} = this.props;
+        deleteUser(id);
+    }
     
     render() {
         const {name, department, semester} = this.props;
@@ -32,7 +36,7 @@ class User extends Component {
                 <div className="card">
                     <div className="card-header d-flex justify-content-between" >
                         <h4 className="d-inline" onClick={this.onClickEvent} style={{cursor:"pointer"}}>Name: {name}</h4>
-                        <i className="far fa-trash-alt" style={{cursor:"pointer"}}></i>                        
+                        <i onClick={this.onDeleteUser} className="far fa-trash-alt" style={{cursor:"pointer"}}></i>                        
                     </div>
                     {
                         isToggleOn ? 
@@ -49,13 +53,15 @@ class User extends Component {
 User.propTypes = {
     name: PropTypes.string.isRequired,
     department: PropTypes.string.isRequired,
-    semester: PropTypes.string.isRequired,
+    semester: PropTypes.number.isRequired,
+    deleteUser: PropTypes.func.isRequired,
 
 }
 User.defaultProps = {
     name: "No information",
     department: "No information",
     semester: "No information",
+    deleteUser: "No information",
 
 }
 export default User;
